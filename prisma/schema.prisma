@@ -1,0 +1,65 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mongodb"
+  url      = env("DATABASE_URL")
+}
+
+model Artist{
+  id             String   @id @default(auto()) @map("_id") @db.ObjectId
+  name           String
+  stageName      String   @unique
+  description    String
+  image String
+  coverArt String
+  country String
+  songs          String[] @default([])
+  followers      Int      @default(0)
+  projects       String[] @default([])
+  verified       Boolean  @default(false)
+  createdOn      DateTime @default(now())
+  socials        SocialMedia
+}
+
+model Song {
+  id            String   @id @default(auto()) @map("_id") @db.ObjectId
+  title          String
+  artistId      String[]
+  duration       String
+  releaseDate   DateTime @default(now())
+  lyrics         String
+  coverArt       String
+  trackNumber    Int
+  listeners      Int   @default(0)
+  audio          String
+}
+
+model User {
+  id            String   @id @default(auto()) @map("_id") @db.ObjectId
+  name          String
+  email         String   @unique
+  password       String
+  followedArtist  String[]
+  followedGenre   String[]
+  likedSongs      String[]  @default([])
+  recentlyPlayed  String[]  @default([])
+  Queue           String[]  @default([])
+  createdOn      DateTime @default(now())
+  avatar         String
+  currentSong    String 
+}
+
+type SocialMedia{
+  facebook   String?
+  twitter    String?
+  instagram  String?
+  soundcloud String?
+}
