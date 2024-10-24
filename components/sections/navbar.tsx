@@ -3,6 +3,15 @@ import { UserRound } from "lucide-react";
 import Link from "next/link";
 import React from "react";
 import { GoHome, GoHomeFill } from "react-icons/go";
+import {
+  ClerkProvider,
+  SignInButton,
+  SignOutButton,
+  SignUpButton,
+  SignedIn,
+  SignedOut,
+  UserButton,
+} from "@clerk/nextjs";
 
 const Navbar = () => {
   return (
@@ -25,13 +34,24 @@ const Navbar = () => {
             placeholder="What on your mood lately!"
           />
         </Link>
-        <Link href="/content-feed" className="p-3 rounded-full h-full bg-dark-400 w-fit">
+        <Link
+          href="/content-feed"
+          className="p-3 rounded-full h-full bg-dark-400 w-fit"
+        >
           <IconBell />
         </Link>
       </div>
-      <div className="p-3 rounded-full h-full bg-dark-400 w-fit ">
-        <UserRound className="w-full h-full " />
-        
+      <div className="flex gap-10">
+        <SignedOut>
+          <SignInButton />
+        </SignedOut>
+        <SignedIn>
+          {/* <UserButton /> */}
+          <SignOutButton/>
+        </SignedIn>
+        <div className="p-3 rounded-full h-full bg-dark-400 w-fit ">
+          <UserRound className="w-full h-full " />
+        </div>
       </div>
     </div>
   );

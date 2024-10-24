@@ -1,5 +1,8 @@
 import type { Metadata } from "next";
 import { Plus_Jakarta_Sans } from "next/font/google";
+import {
+  ClerkProvider,
+} from '@clerk/nextjs'
 import "./globals.css";
 
 import { cn } from "@/lib/utils";
@@ -29,6 +32,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
+    <ClerkProvider>
     <html lang="en">
       <body
         className={cn("min-h-screen bg-dark-200 font-mono antialiased", fontSans.variable)}
@@ -75,5 +79,6 @@ export default function RootLayout({
         </ThemeProvider>
       </body>
     </html>
+    </ClerkProvider>
   );
 }

@@ -1,3 +1,4 @@
+
 export const artist = {
     name: "Krishna Kaul",
     stageName: "KR$NA",
